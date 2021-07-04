@@ -1,0 +1,44 @@
+{
+  "name": "Hermes",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "DanCodes <dan@dancodes.online>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node index.ts",
+    "dev:nodemon": "nodemon --signal SIGKILL --ext ts --exec yarn dev",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "start:shards": "node ./dist/shard.js",
+    "start:inspect": "node --inspect ./dist/index.js"
+  },
+  "dependencies": {
+    "@joshdb/core": "^1.2.4",
+    "@joshdb/json": "https://gitpkg.now.sh/dan-online/josh-providers/josh-json?master",
+    "@tensorflow/tfjs-node-gpu": "^3.7.0",
+    "axios": "^0.21.1",
+    "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
+    "dotenv": "^10.0.0",
+    "file-system": "^2.2.2",
+    "jet-logger": "^1.0.6",
+    "jimp": "^0.16.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "eslint": "^7.29.0",
+    "nodemon": "^2.0.8",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
+  },
+  "optionalDependencies": {
+    "@tensorflow/tfjs-node": "^3.7.0",
+    "bufferutil": "^4.0.3",
+    "canvas": "^2.8.0",
+    "erlpack": "discord/erlpack",
+    "nsfwjs": "^2.4.1",
+    "utf-8-validate": "^5.0.5"
+  }
+}
