@@ -31,7 +31,8 @@ export default {
     const model = await loadModel();
 
     if (message.attachments.size > 0) {
-      for (const [_id, attachment] of message.attachments[Symbol.iterator]()) {
+      for (const a of message.attachments[Symbol.iterator]()) {
+        const attachment = a[1];
         if (attachment.contentType?.startsWith("image")) {
           const pic = (await axios.get(attachment.proxyURL, {
             responseType: "arraybuffer",

@@ -1,5 +1,4 @@
 import { Message, Permissions } from "discord.js";
-import util from "util";
 
 import { Hermes } from "../bot";
 

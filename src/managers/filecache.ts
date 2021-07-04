@@ -7,11 +7,7 @@ export class FileCacheManager {
     this.dir = path.resolve(__dirname, "..", "assets", "cache");
     return this;
   }
-  async check(
-    id: string,
-    variator: any,
-    extension: string
-  ): Promise<null | Promise<Buffer>> {
+  async check(id: string, variator: any): Promise<null | Promise<Buffer>> {
     const files = await readdir(this.dir);
 
     const found = files.find((x) => x.startsWith(id));

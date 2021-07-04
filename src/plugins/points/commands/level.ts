@@ -4,7 +4,6 @@ import path from "path";
 import { Hermes } from "../../../bot";
 import { CanvasManager } from "../../../managers/canvas";
 import download from "../../../utils/download";
-import formatNumber from "../../../utils/formatNumber";
 
 export default {
   commandName: "level",
@@ -22,7 +21,7 @@ export default {
 
     const id = "level-" + message.author.id + "-" + message.guild?.id;
 
-    const check = await cache.check(id, level, ".jpg");
+    const check = await cache.check(id, level);
 
     if (check) {
       message.channel.send({

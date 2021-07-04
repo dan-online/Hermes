@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "ts-node index.ts",
     "dev:nodemon": "nodemon --signal SIGKILL --ext ts --exec yarn dev",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
     "build": "tsc",
     "start": "node ./dist/index.js",
     "start:shards": "node ./dist/shard.js",
