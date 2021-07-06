@@ -17,7 +17,7 @@ export default {
 
     const id = "balance-" + message.author.id + "-" + message.guild?.id;
 
-    const check = await cache.check(id, bal, ".jpg");
+    const check = await cache.check(id, bal);
 
     if (check) {
       message.channel.send({

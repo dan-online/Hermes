@@ -10,7 +10,7 @@ export default {
     message: Message,
     args: string[]
   ): Promise<void> => {
-    const member = getmember(message, args);
+    const { member } = getmember(message, args);
     const id = args.find((x) => x.length >= 18) as `${bigint}` | undefined;
     if (member) {
       message.channel.send(

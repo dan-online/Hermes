@@ -14,7 +14,7 @@ export default {
   ): Promise<void> => {
     if (!message.guild || !message.member) return;
 
-    const member = getmember(message, args);
+    const { member } = getmember(message, args);
 
     if (!member) {
       message.channel.send(

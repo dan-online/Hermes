@@ -10,7 +10,7 @@ export default {
 
     const commands = Hermes.commands;
     const prefix = Hermes.config.prefix;
-    const content = message.cleanContent;
+    const content = message.content;
 
     const prefixFound = content.split(prefix).length > 1;
 

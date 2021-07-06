@@ -1,12 +1,13 @@
 import { Message } from "discord.js";
 import { Hermes } from "../../../bot";
 import getmember from "../../../utils/getmember";
+import createInteraction from "../../../utils/interaction";
 
 export default {
   commandName: "ban",
   aliases: [],
   commandFn: (Hermes: Hermes, message: Message, args: string[]): void => {
-    const member = getmember(message, args);
+    const { member, reason } = getmember(message, args);
 
     if (!member) {
       message.channel.send(
@@ -15,29 +16,51 @@ export default {
       return;
     }
 
-    const reason = args.join(" ") || "N/A";
-    member
-      .send(
-        "You have been banned from " +
-          message.guild?.name +
-          " for ``" +
-          reason +
-          "``"
-      )
-      .then((m) => {
-        member
-          .ban({ reason: reason })
-          .then(() => {
-            message.channel.send("Successfully baned " + member.displayName);
-          })
-          .catch((err) => {
-            message.channel.send(
-              "Unable to ban " + member.displayName + " due to " + err.message
-            );
-            m.delete();
-          });
-      });
-
-    message.channel.send(member.id);
+    createInteraction(
+      "You are about to ban ``" +
+        member.user.username +
+        "`` for ``" +
+        reason +
+        "``" +
+        "\n**Are you sure?**",
+      message,
+      [
+        {
+          label: "Cancel",
+          style: "PRIMARY",
+          customID: "cancel",
+        },
+        {
+          label: "Confirm",
+          style: "DANGER",
+          customID: "confirm",
+        },
+      ]
+    ).then(({ interaction, m, update }) => {
+      if (interaction.customID != "confirm") {
+        return update("Ban successfully cancelled");
+      }
+      member
+        .send(
+          "You have been banned from " +
+            message.guild?.name +
+            " for ``" +
+            reason +
+            "``"
+        )
+        .then((m) => {
+          member
+            .ban({ reason: reason })
+            .then(() => {
+              update("Successfully banned " + member.displayName);
+            })
+            .catch((err) => {
+              update(
+                "Unable to ban " + member.displayName + " due to " + err.message
+              );
+              m.delete();
+            });
+        });
+    });
   },
 };
