@@ -1,4 +1,4 @@
-import { Guild, GuildMember, Message } from "discord.js";
+import { GuildMember, Message } from "discord.js";
 import { Hermes } from "../../../bot";
 import getmember from "../../../utils/getmember";
 import createInteraction from "../../../utils/interaction";
@@ -52,7 +52,7 @@ export default {
           customID: "confirm",
         },
       ]
-    ).then(({ interaction, m, update }) => {
+    ).then(({ interaction, update }) => {
       if (interaction.customID != "confirm") {
         return update("Kick successfully cancelled");
       }

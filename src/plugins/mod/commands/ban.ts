@@ -36,7 +36,7 @@ export default {
           customID: "confirm",
         },
       ]
-    ).then(({ interaction, m, update }) => {
+    ).then(({ interaction, update }) => {
       if (interaction.customID != "confirm") {
         return update("Ban successfully cancelled");
       }
