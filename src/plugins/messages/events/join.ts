@@ -44,7 +44,7 @@ export default {
     await canvas.addBackgroundImage(pfg);
 
     await canvas.addText(
-      "Welcome " + trim("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA", 12) + "!",
+      "Welcome " + trim(member.displayName, 12) + "!",
       20,
       55,
       "white",
