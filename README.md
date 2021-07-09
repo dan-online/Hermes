@@ -19,7 +19,7 @@ To use stable releases go to [releases](../../releases)
 
 ## To-do
 
-- ~Economy
+- ~Economy~
 - ~Points system~
 - Webhook plugin
 - API plugin
