@@ -1,4 +1,4 @@
-<img alt="Hermes logo" src="assets/images/hermes.png" height="100">
+<img alt="Hermes logo" src="src/assets/images/readme.png" height="100">
 
 # Hermes
 
