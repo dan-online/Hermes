@@ -23,7 +23,7 @@ export default {
       leave: ":(",
     },
     mod: {
-      enabled: true,
+      enabled: false,
       nsfw: true,
       /*
       Drawing - safe for work drawings (including anime)
