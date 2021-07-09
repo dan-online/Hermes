@@ -1,16 +1,20 @@
 name: Lint
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - uses: c-hive/gha-yarn-cache@v2
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-    - name: Install JS dependencies
-      run: yarn install
-    - name: Test
-      run: yarn lint
+      - name: Install packages
+        run: yarn install
+
+      - name: Run linting checks
+        run: yarn lint
