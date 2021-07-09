@@ -1,17 +1,15 @@
 <p align="center">
-
-  <img alt="Hermes logo" src="src/assets/images/readme.png" height="100">
-
-  # Hermes
-
-  > A template for a discord bot written with discordjs v13 with reloadable events and commands along with a multitude of plugins
-
-  [![Discordjs Version][discordjs-image]][discordjs-url]
-  ![Discord-Bot languages](https://img.shields.io/github/languages/count/dan-online/hermes)
-  ![Discord-bot version](https://img.shields.io/github/package-json/v/dan-online/hermes)
-  [![Hermes CI][ci-image]][ci-url]
-
+  <img  alt="Hermes logo" src="src/assets/images/readme.png" height="100">
 </p>
+<h1 align="center">Hermes</h1>
+
+> A template for a discord bot written with discordjs v13 with reloadable events and commands along with a multitude of plugins
+
+[![Discordjs Version][discordjs-image]][discordjs-url]
+![Discord-Bot languages](https://img.shields.io/github/languages/count/dan-online/hermes)
+![Discord-bot version](https://img.shields.io/github/package-json/v/dan-online/hermes)
+[![Hermes CI][ci-image]][ci-url]
+
 
 ## Downloads
 
