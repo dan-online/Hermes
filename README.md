@@ -1,3 +1,5 @@
+<img alt="Hermes logo" src="assets/images/hermes.png" height="100">
+
 # Hermes
 
 > A template for a discord bot written with discordjs v13 with reloadable events and commands along with a multitude of plugins
