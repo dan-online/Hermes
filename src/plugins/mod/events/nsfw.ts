@@ -80,7 +80,7 @@ export default {
                   "%"
               )
               .then((m) => {
-                setTimeout(m.delete, 3000);
+                setTimeout(() => m.delete(), 3000);
               });
           }
         }
