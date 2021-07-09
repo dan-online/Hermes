@@ -3,3 +3,4 @@ data
 dist
 .env
 src/assets/cache/*.jpg
+yarn.lock
