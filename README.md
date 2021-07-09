@@ -69,7 +69,7 @@ Distributed under the MIT license. See `LICENSE` for more information.
 
 <!-- Markdown link & img dfn's -->
 
-[discordjs-image]: https://img.shields.io/npm/v/discord.js?color=%232196f3&label=discord.js
+[discordjs-image]: https://img.shields.io/github/package-json/dependency-version/dan-online/Hermes/discord.js
 [ci-url]: https://github.com/dan-online/Hermes/actions
 [ci-image]: https://github.com/dan-online/Hermes/workflows/Lint/badge.svg
 [discordjs-url]: https://discord.js.org
