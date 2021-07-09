@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import fs from "fs";
 import path from "path";
 
@@ -69,11 +70,7 @@ export default class PluginManager extends Map {
         const props = require(location).default;
         events.push(Hermes.events.addEvent(Hermes, event, props));
       }
-    } catch (err) {
-      Hermes.logger.err(
-        "Unable to find events in " + plugin + ", err: " + err.message
-      );
-    }
+    } catch {}
     try {
       const commandFiles = fs.readdirSync(path.resolve(dir, "commands"));
       for (const command of commandFiles) {
@@ -81,11 +78,7 @@ export default class PluginManager extends Map {
         const props = require(location).default;
         commands.push(Hermes.commands.addCommand(props, location));
       }
-    } catch (err) {
-      Hermes.logger.err(
-        "Unable to find commands in " + plugin + ", err: " + err.message
-      );
-    }
+    } catch {}
     const finalPlugin = new Plugin(Hermes, props, events, commands);
     this.set(props.pluginName, finalPlugin);
     return finalPlugin;

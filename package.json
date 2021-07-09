@@ -6,13 +6,28 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node index.ts",
-    "dev:nodemon": "nodemon --signal SIGKILL --ext ts --exec yarn dev",
+    "dev:watch": "concurrently --kill-others \"yarn build:watch\" \"yarn start:nodemon\"",
+    "dev:nodemon": "nodemon",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "build": "tsc",
-    "start": "node ./dist/index.js",
+    "build:watch": "tsc -w",
+    "start": "NODE_ENV=production node ./dist/index.js",
     "start:shards": "node ./dist/shard.js",
-    "start:inspect": "node --inspect ./dist/index.js"
+    "start:inspect": "node --inspect ./dist/index.js",
+    "start:nodemon": "nodemon --signal SIGKILL --ext ts --exec yarn start"
+  },
+  "nodemonConfig": {
+    "signal": "SIGKILL",
+    "watch": [
+      "src"
+    ],
+    "ext": "ts, html",
+    "ignore": [
+      "src/public",
+      "src/vault"
+    ],
+    "exec": "yarn dev"
   },
   "dependencies": {
     "@joshdb/core": "^1.2.4",
@@ -30,6 +45,7 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
+    "concurrently": "^6.2.0",
     "eslint": "^7.29.0",
     "nodemon": "^2.0.8",
     "ts-node": "^10.0.0",
