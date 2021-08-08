@@ -17,7 +17,7 @@ export class Hermes extends Client {
   logger = logger;
   constructor() {
     super({
-      intents: Intents.ALL,
+      intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MEMBERS"],
     });
 
     this.commands.init();

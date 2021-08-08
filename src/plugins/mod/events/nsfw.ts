@@ -17,7 +17,7 @@ async function loadModel(): Promise<nsfw.NSFWJS> {
   return model;
 }
 export default {
-  eventName: "message",
+  eventName: "messageCreate",
   eventFn: async (Hermes: Hermes, message: Message): Promise<void> => {
     const config = Hermes.config.plugins.mod;
     if (!config.nsfw) {

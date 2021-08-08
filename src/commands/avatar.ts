@@ -15,8 +15,8 @@ export default {
     if (member) {
       message.channel.send(
         member.user.displayAvatarURL({
+          dynamic: true,
           size: 512,
-          format: member.user.avatar?.startsWith("a_") ? "gif" : "png",
         })
       );
     } else if (id) {
@@ -24,14 +24,14 @@ export default {
       message.channel.send(
         resolved.displayAvatarURL({
           size: 512,
-          format: resolved.avatar?.startsWith("a_") ? "gif" : "png",
+          dynamic: true,
         })
       );
     } else {
       message.channel.send(
         message.author.displayAvatarURL({
           size: 512,
-          format: message.author.avatar?.startsWith("a_") ? "gif" : "png",
+          dynamic: true,
         })
       );
     }

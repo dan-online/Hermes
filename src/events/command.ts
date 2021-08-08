@@ -3,10 +3,10 @@ import { Hermes } from "../bot";
 import { Message } from "discord.js";
 
 export default {
-  eventName: "message",
+  eventName: "messageCreate",
   eventFn: (Hermes: Hermes, message: Message): void => {
     if (message.author.bot) return;
-    if (message.channel.type == "dm") return;
+    if (message.channel.type == "DM") return;
 
     const commands = Hermes.commands;
     const prefix = Hermes.config.prefix;

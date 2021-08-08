@@ -21,7 +21,7 @@ export default {
       }
       message.channel.send("```js\n" + util.inspect(val) + "```");
     } catch (err) {
-      message.channel.send("Error: " + err.message);
+      message.channel.send("Error: " + (err as Error).message);
     }
   },
 };

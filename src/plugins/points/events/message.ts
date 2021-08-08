@@ -3,7 +3,7 @@ import { Message } from "discord.js";
 import { Hermes } from "../../../bot";
 
 export default {
-  eventName: "message",
+  eventName: "messageCreate",
   eventFn: (Hermes: Hermes, message: Message): void => {
     if (message.author.bot || !message.guild) return;
     Hermes.plugins

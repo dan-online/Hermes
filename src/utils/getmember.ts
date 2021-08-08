@@ -18,7 +18,7 @@ export default function (
     }
   }
   if (!member) {
-    const name: string | undefined = args.find((x) => isNaN(Number(x)));
+    const name: string | undefined = args.join(" ");
     member = message.guild?.members.cache.find((x) => x.displayName == name);
     if (member) {
       reason = args.filter((x) => x != name).join(" ");

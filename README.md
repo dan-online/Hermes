@@ -21,12 +21,15 @@ To use stable releases go to [releases](../../releases)
 
 - ~Economy~
 - ~Points system~
+- ~Mod plugin~
+- ~AutoMod plugin~
+- ~Points system~
 - Webhook plugin
 - API plugin
 - Music plugin
 - Translate
 - ~Welcome/Leave messages~
-- ~Verification system (email/oauth/captcha/in-dm-captcha)~
+- Verification system (email/oauth/captcha/in-dm-captcha)
 - Status page
 - CLI init
 

@@ -36,7 +36,7 @@
     "@joshdb/json": "https://gitpkg.now.sh/dan-online/josh-providers/josh-json?master",
     "@tensorflow/tfjs-node-gpu": "^3.7.0",
     "axios": "^0.21.1",
-    "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
+    "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
     "file-system": "^2.2.2",
     "jet-logger": "^1.0.6",
