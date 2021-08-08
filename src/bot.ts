@@ -1,4 +1,4 @@
-import { Client, Intents } from "discord.js";
+import { Client } from "discord.js";
 
 import CommandManager from "./managers/commands";
 import logger from "./utils/log";
