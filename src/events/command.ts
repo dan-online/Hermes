@@ -3,6 +3,7 @@ import { Hermes } from "../bot";
 import { Message } from "discord.js";
 
 export default {
+  // deprecated in favour of interactions
   eventName: "messageCreate",
   eventFn: (Hermes: Hermes, message: Message): void => {
     if (message.author.bot) return;
@@ -49,6 +50,7 @@ export default {
       return;
     }
 
+    //@ts-ignore
     commandFn.fn(Hermes, message, args);
   },
 };

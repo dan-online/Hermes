@@ -44,16 +44,16 @@ export default {
         {
           label: "Cancel",
           style: "PRIMARY",
-          customID: "cancel",
+          customId: "cancel",
         },
         {
           label: "Confirm",
           style: "DANGER",
-          customID: "confirm",
+          customId: "confirm",
         },
       ]
     ).then(({ interaction, update }) => {
-      if (interaction.customID != "confirm") {
+      if (interaction.customId != "confirm") {
         return update("Kick successfully cancelled");
       }
       member

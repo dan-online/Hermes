@@ -11,7 +11,7 @@ export default {
   eventFn: async (Hermes: Hermes, member: GuildMember): Promise<void> => {
     const config = Hermes.config.plugins.messages;
     const channel = member.guild.channels.cache.find(
-      (x) => x.name == config.channel && x.type == "text"
+      (x) => x.name == config.channel && x.type == "GUILD_TEXT"
     ) as unknown as TextChannel;
 
     const height = 200;

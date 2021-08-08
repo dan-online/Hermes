@@ -27,7 +27,7 @@ export default async function (
       },
     ],
   });
-  const interaction = await m.awaitMessageComponentInteraction();
+  const interaction = await m.awaitMessageComponent();
   function update(text: string) {
     const disabled = [];
     for (const component of components) {

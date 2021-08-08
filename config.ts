@@ -23,8 +23,8 @@ export default {
       leave: ":(",
     },
     mod: {
-      enabled: false,
-      nsfw: true,
+      enabled: true,
+      nsfw: false,
       /*
       Drawing - safe for work drawings (including anime)
       Hentai - hentai and pornographic drawings

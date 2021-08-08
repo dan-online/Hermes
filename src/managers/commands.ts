@@ -1,12 +1,12 @@
 import fs from "fs";
 import path from "path";
-import { Message, Permissions } from "discord.js";
+import { ApplicationCommandData, Interaction, Permissions } from "discord.js";
 
 import { Hermes } from "../bot";
 
 type CommandFnType = (
   bot: Hermes,
-  message: Message,
+  message: Interaction,
   args: string[],
   ...rest: any[]
 ) => void;
@@ -16,6 +16,7 @@ type CommandProps = {
   commandName: string;
   aliases?: string[];
   permissions?: Permissions;
+  slash: ApplicationCommandData;
 };
 
 export class Command {
@@ -24,7 +25,9 @@ export class Command {
   aliases: string[];
   permissions: Permissions;
   location: string;
+  slash: ApplicationCommandData;
   constructor(props: CommandProps, location: string) {
+    this.slash = props.slash;
     this.location = location;
     this.fn = props.commandFn;
     this.name = props.commandName;
