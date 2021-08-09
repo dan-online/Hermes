@@ -1,11 +1,16 @@
 import {
   ApplicationCommandData,
+  ApplicationCommandPermissionData,
   CommandInteraction,
   Permissions,
 } from "discord.js";
 import config from "../../config";
 
 import { Hermes } from "../bot";
+
+interface extraApp extends ApplicationCommandData {
+  permissions: ApplicationCommandPermissionData[];
+}
 
 export default {
   commandName: "deploy",
@@ -24,7 +29,7 @@ export default {
     Hermes: Hermes,
     interaction: CommandInteraction
   ): Promise<void> => {
-    const data: ApplicationCommandData[] = [];
+    const data: extraApp[] = [];
 
     for (const command of Hermes.commands.values()) {
       if (command.slash) {
@@ -33,8 +38,15 @@ export default {
     }
     const commands = interaction.guild?.commands.set(data);
     commands
-      ?.then(() => {
-        interaction.reply("Commands registered!");
+      ?.then(async (finalCommands) => {
+        for (const command of data) {
+          if (command.permissions) {
+            await finalCommands
+              .find((x) => x.name == command.name)
+              ?.permissions.set({ permissions: command.permissions });
+          }
+        }
+        interaction.reply("Commands deployed!");
       })
       .catch(console.error);
   },

@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { CommandInteraction, GuildMember } from "discord.js";
 import path from "path";
 import { Hermes } from "../../../bot";
 import { CanvasManager } from "../../../managers/canvas";
@@ -8,23 +8,30 @@ import formatNumber from "../../../utils/formatNumber";
 export default {
   commandName: "balance",
   aliases: ["bal", "b"],
-  commandFn: async (Hermes: Hermes, message: Message): Promise<void> => {
+  slash: {
+    name: "balance",
+    description: "View your balance in the guild economy",
+  },
+  commandFn: async (
+    Hermes: Hermes,
+    interaction: CommandInteraction
+  ): Promise<void> => {
     const cache = Hermes.fileCache;
 
     const bal = await Hermes.plugins
       .get("economy")
-      .plugin.getUser(message.author, message.guild);
+      .plugin.getUser(interaction.user, interaction.guild);
 
-    const id = "balance-" + message.author.id + "-" + message.guild?.id;
+    const id = "balance-" + interaction.user.id + "-" + interaction.guild?.id;
 
     const check = await cache.check(id, bal);
 
     if (check) {
-      message.channel.send({
+      interaction.reply({
         files: [
           {
             attachment: await check,
-            name: "balance_" + message.author.id + ".jpg",
+            name: "balance_" + interaction.user.id + ".jpg",
           },
         ],
       });
@@ -35,10 +42,10 @@ export default {
     const height = 300;
     const canvas = new CanvasManager(height, width);
     const pfp = await download(
-      message.author.displayAvatarURL({ format: "png", size: 512 })
+      interaction.user.displayAvatarURL({ format: "png", size: 512 })
     );
-    const icon = message.guild
-      ? message.guild.iconURL({ size: 512, format: "png" })
+    const icon = interaction.guild
+      ? interaction.guild.iconURL({ size: 512, format: "png" })
       : null;
 
     let pfg;
@@ -61,14 +68,17 @@ export default {
     await canvas.addBackgroundImage(pfg);
 
     canvas.addText(
-      (message.member?.displayName || message.author.username).slice(0, 20),
+      (
+        (interaction.member as GuildMember).displayName ||
+        interaction.user.username
+      ).slice(0, 20),
       imageHeight + 70,
       100,
       "white",
       height * 0.2
     );
     canvas.addText(
-      "Bank of " + message.guild?.name,
+      "Bank of " + interaction.guild?.name,
       imageHeight + 70,
       150,
       "white",
@@ -93,11 +103,11 @@ export default {
 
     const exported = canvas.export();
 
-    message.channel.send({
+    interaction.reply({
       files: [
         {
           attachment: exported,
-          name: "balance_" + message.author.id + ".jpg",
+          name: "balance_" + interaction.user.id + ".jpg",
         },
       ],
     });

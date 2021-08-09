@@ -1,20 +1,22 @@
-import { CommandInteraction } from "discord.js";
+import { CommandInteraction, Message } from "discord.js";
 
 import { Hermes } from "../bot";
 
 export default {
   commandName: "ping",
-  commandFn: (bot: Hermes, interaction: CommandInteraction): void => {
-    const now = new Date().getTime();
-    console.log(interaction);
-    const start = interaction.createdTimestamp;
-    const speed = now - start;
-    interaction.reply(
-      "PONG! " +
+  commandFn: async (
+    bot: Hermes,
+    interaction: CommandInteraction
+  ): Promise<void> => {
+    await interaction.deferReply();
+    const reply = (await interaction.editReply("Ping?")) as Message;
+    const speed = reply.createdTimestamp - interaction.createdTimestamp;
+    interaction.editReply(
+      "PONG! **" +
         speed +
-        "ms and discord connection speed of " +
+        "ms** of reply latency and discord latency of **" +
         bot.ws.ping +
-        "ms"
+        "ms**"
     );
   },
   slash: {
