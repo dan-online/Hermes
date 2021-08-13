@@ -33,9 +33,9 @@ To use stable releases go to [releases](../../releases)
 - Status page
 - CLI init
 
-## Installation
+<!-- ## Installation
 
-Make sure to have FFmpeg/avconv installed for the youtube plugin
+Make sure to have FFmpeg/avconv installed for the youtube plugin -->
 
 #### Config
 
@@ -51,6 +51,7 @@ $ npm install
 ## Usage example
 
 ```sh
+$ yarn build
 $ yarn start
 # or
 $ npm start
