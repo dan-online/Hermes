@@ -1,30 +1,47 @@
-import { Guild, Message } from "discord.js";
+import { CommandInteraction, Guild } from "discord.js";
 import { Mod } from "../mod";
 import { Hermes } from "../../../bot";
 
 export default {
   commandName: "hackban",
   aliases: [],
-  commandFn: (Hermes: Hermes, message: Message, args: string[]): void => {
+  slash: {
+    name: "hackban",
+    description: "Ban a user not currently a member",
+    options: [
+      {
+        name: "id",
+        type: "STRING",
+        description: "ID of user to hackban",
+        required: true,
+      },
+      {
+        name: "reason",
+        type: "STRING",
+        description: "Reason for hackban",
+      },
+    ],
+  },
+  commandFn: (Hermes: Hermes, interaction: CommandInteraction): void => {
     const plugin = Hermes.plugins.get("mod").plugin as Mod;
-    const member = args.find((x) => x.length >= 18) as `${bigint}` | undefined;
+    const member = interaction.options.getString("id");
 
     if (!member) {
-      message.channel.send("Invalid users mentioned, make sure you use an id");
+      interaction.reply("Invalid users mentioned, make sure you use an id");
       return;
     }
-    const reason = args.join(" ") || "N/A";
+    const reason = interaction.options.getString("reason") || "N/A";
     Hermes.users
       .fetch(member)
       .then(async (user) => {
         const hackbanCase = await plugin.addCase(
-          message.guild as Guild,
+          interaction.guild as Guild,
           user,
           reason,
-          message.author,
+          interaction.user,
           "hackban"
         );
-        message.channel.send(
+        interaction.reply(
           "Hackbanned " +
             user.username +
             "#" +
@@ -34,9 +51,7 @@ export default {
         );
       })
       .catch((err) => {
-        message.channel.send(
-          "Unable to find this discord user: " + err.message
-        );
+        interaction.reply("Unable to find this discord user: " + err.message);
       });
 
     // message.channel.send(member.id);

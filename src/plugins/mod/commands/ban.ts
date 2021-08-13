@@ -1,20 +1,43 @@
-import { Message } from "discord.js";
+import { CommandInteraction, GuildMember, Permissions } from "discord.js";
 import { Hermes } from "../../../bot";
-import getmember from "../../../utils/getmember";
 import createInteraction from "../../../utils/interaction";
 
 export default {
   commandName: "ban",
+  permissions: new Permissions(["BAN_MEMBERS"]),
   aliases: [],
-  commandFn: (Hermes: Hermes, message: Message, args: string[]): void => {
-    const { member, reason } = getmember(message, args);
+  slash: {
+    name: "ban",
+    description: "[BAN] Ban a user from your guild",
+    options: [
+      {
+        name: "member",
+        description: "Member to ban",
+        type: "USER",
+        required: true,
+      },
+      {
+        name: "reason",
+        description: "Reason for ban",
+        type: "STRING",
+      },
+    ],
+  },
+  commandFn: async (
+    Hermes: Hermes,
+    interaction: CommandInteraction
+  ): Promise<void> => {
+    const reason = interaction.options.getString("reason") || "N/A";
+    const member = interaction.options.getMember("member") as GuildMember;
 
     if (!member) {
-      message.channel.send(
+      interaction.reply(
         "Invalid users mentioned, make sure you use an id, mention or nickname"
       );
       return;
     }
+
+    await interaction.deferReply();
 
     createInteraction(
       "You are about to ban ``" +
@@ -23,7 +46,7 @@ export default {
         reason +
         "``" +
         "\n**Are you sure?**",
-      message,
+      interaction,
       [
         {
           label: "Cancel",
@@ -37,13 +60,13 @@ export default {
         },
       ]
     ).then(({ interaction, update }) => {
-      if (interaction.customId != "confirm") {
+      if (interaction?.customId != "confirm") {
         return update("Ban successfully cancelled");
       }
       member
         .send(
           "You have been banned from " +
-            message.guild?.name +
+            interaction.guild?.name +
             " for ``" +
             reason +
             "``"

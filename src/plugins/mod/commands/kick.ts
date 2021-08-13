@@ -1,37 +1,49 @@
-import { GuildMember, Message } from "discord.js";
+import {
+  CommandInteraction,
+  GuildMember,
+  Message,
+  Permissions,
+} from "discord.js";
 import { Hermes } from "../../../bot";
-import getmember from "../../../utils/getmember";
 import createInteraction from "../../../utils/interaction";
 
 export default {
   commandName: "kick",
+  permissions: new Permissions(["KICK_MEMBERS"]),
   aliases: [],
-  commandFn: (Hermes: Hermes, message: Message, args: string[]): void => {
-    const { member, reason } = getmember(message, args);
+  slash: {
+    name: "kick",
+    description: "[KICK] Kick a user from your guild",
+    options: [
+      {
+        name: "member",
+        description: "Member to kick",
+        type: "USER",
+        required: true,
+      },
+      {
+        name: "reason",
+        description: "Reason for kick",
+        type: "STRING",
+      },
+    ],
+  },
+  commandFn: async (
+    Hermes: Hermes,
+    interaction: CommandInteraction
+  ): Promise<void> => {
+    const reason = interaction.options.getString("reason") || "N/A";
+    const member = interaction.options.getMember("member") as GuildMember;
 
     if (!member) {
-      message.channel.send(
+      interaction.reply(
         "Invalid users mentioned, make sure you use an id, mention or nickname"
       );
       return;
     }
-    function next(
-      update: (text: string) => void,
-      member: GuildMember,
-      m?: Message
-    ) {
-      member
-        .kick(reason)
-        .then(() => {
-          update("Successfully kicked " + member.displayName);
-        })
-        .catch((err) => {
-          update(
-            "Unable to kick " + member.displayName + " due to " + err.message
-          );
-          if (m) m.delete();
-        });
-    }
+
+    await interaction.deferReply();
+
     createInteraction(
       "You are about to kick ``" +
         member.user.username +
@@ -39,7 +51,7 @@ export default {
         reason +
         "``" +
         "\n**Are you sure?**",
-      message,
+      interaction,
       [
         {
           label: "Cancel",
@@ -52,28 +64,33 @@ export default {
           customId: "confirm",
         },
       ]
-    ).then(({ interaction, update }) => {
-      if (interaction.customId != "confirm") {
+    ).then(async ({ interaction, update }) => {
+      if (interaction?.customId != "confirm") {
         return update("Kick successfully cancelled");
       }
-      member
-        .send(
+      let m: Message;
+      try {
+        m = await member.send(
           "You have been kicked from " +
-            message.guild?.name +
+            interaction.guild?.name +
             " for ``" +
             reason +
             "``"
-        )
-        .then((m) => {
-          next(update, member, m);
+        );
+      } catch {
+        // no way to send message
+      }
+
+      member
+        .kick(reason)
+        .then(() => {
+          update("Successfully kicked " + member.displayName);
         })
         .catch((err) => {
-          message.channel.send(
-            "Unable to send kick message due to: " +
-              err.message +
-              ", proceeding to kick"
+          update(
+            "Unable to kick " + member.displayName + " due to " + err.message
           );
-          next(update, member);
+          if (m) m.delete();
         });
     });
   },

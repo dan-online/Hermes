@@ -1,4 +1,4 @@
-import { CommandInteraction, Message, Permissions } from "discord.js";
+import { CommandInteraction, Permissions } from "discord.js";
 import util from "util";
 import config from "../../config";
 

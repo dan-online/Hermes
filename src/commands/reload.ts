@@ -1,4 +1,4 @@
-import { CommandInteraction, Message, Permissions } from "discord.js";
+import { CommandInteraction, Permissions } from "discord.js";
 import config from "../../config";
 
 import { Hermes } from "../bot";

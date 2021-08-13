@@ -1,14 +1,14 @@
 import {
-  ApplicationCommandData,
   ApplicationCommandPermissionData,
   CommandInteraction,
+  MessageApplicationCommandData,
   Permissions,
 } from "discord.js";
 import config from "../../config";
-
+import util from "util";
 import { Hermes } from "../bot";
 
-interface extraApp extends ApplicationCommandData {
+interface extraApp extends MessageApplicationCommandData {
   permissions: ApplicationCommandPermissionData[];
 }
 
@@ -36,6 +36,7 @@ export default {
         data.push(command.slash);
       }
     }
+    console.log(util.inspect(data, { depth: 3 }));
     const commands = interaction.guild?.commands.set(data);
     commands
       ?.then(async (finalCommands) => {
