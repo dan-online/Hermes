@@ -6,8 +6,8 @@
 > A template for a discord bot written with discordjs v13 with reloadable events and commands along with a multitude of plugins
 
 [![Discordjs Version][discordjs-image]][discordjs-url]
-![Discord-Bot languages](https://img.shields.io/github/languages/count/dan-online/hermes)
-![Discord-bot version](https://img.shields.io/github/package-json/v/dan-online/hermes)
+![Discord-Bot languages](https://img.shields.io/github/languages/count/dan-online/hermes?)
+![Discord-bot version](https://img.shields.io/github/package-json/v/dan-online/hermes?)
 [![Hermes CI][ci-image]][ci-url]
 
 
@@ -75,5 +75,5 @@ Distributed under the MIT license. See `LICENSE` for more information.
 
 [discordjs-image]: https://img.shields.io/github/package-json/dependency-version/dan-online/Hermes/discord.js
 [ci-url]: https://github.com/dan-online/Hermes/actions
-[ci-image]: https://github.com/dan-online/Hermes/workflows/Lint/badge.svg
+[ci-image]: https://github.com/dan-online/Hermes/workflows/Lint/badge.svg?
 [discordjs-url]: https://discord.js.org
