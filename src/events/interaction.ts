@@ -12,18 +12,19 @@ export default {
       return;
     }
 
+    let userAllowed = typeof interaction.member?.permissions != "string"
+      ? interaction.member?.permissions.any(commandFn.permissions)
+      : false;
+
     if (
       commandFn.permissions.bitfield == 0n &&
-      Hermes.config.owners.indexOf(interaction.member?.user.id || "") < 0
+      Hermes.config.owners.indexOf(interaction.user.id || "") < 0
     ) {
       interaction.reply("This is an owner only command!");
       return;
+    } else if (commandFn.permissions.bitfield == 0n) {
+      userAllowed = true;
     }
-
-    let userAllowed =
-      typeof interaction.member?.permissions != "string"
-        ? interaction.member?.permissions.any(commandFn.permissions)
-        : false;
 
     if (!interaction.member?.permissions) {
       userAllowed = true;
@@ -32,7 +33,7 @@ export default {
     if (!userAllowed) {
       interaction.reply(
         "You do not have the correct permissions for this command: " +
-          commandFn.permissions.toArray().join(", ")
+          commandFn.permissions.toArray().join(", "),
       );
       return;
     }

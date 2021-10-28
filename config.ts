@@ -3,7 +3,7 @@ import JoshProvider from "@joshdb/json";
 
 export default {
   prefix: "h!",
-  owners: ["312551747027468290"],
+  owners: ["709674034798788618"],
   color: 0x223040,
   josh: {
     provider: JoshProvider,
